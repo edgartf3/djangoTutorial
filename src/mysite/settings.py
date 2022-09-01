@@ -82,7 +82,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangoTest',
+        'NAME': 'DjangoTest',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',
