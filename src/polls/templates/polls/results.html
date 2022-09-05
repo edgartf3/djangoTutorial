@@ -1,3 +1,11 @@
+{% extends 'polls/model.html'%}
+
+{% block title%}
+<title>Result</title>
+{% endblock %}
+
+
+{% block content %}
 <h1>{{ question.question_text }}</h1>
 
 <ul>
@@ -6,4 +14,8 @@
 {% endfor %}
 </ul>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<a class="btn btn-primary" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+{% endblock %}
+
+

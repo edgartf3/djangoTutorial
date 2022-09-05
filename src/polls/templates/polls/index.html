@@ -1,63 +1,41 @@
-{% load static %}
+{% extends 'polls/model.html'%}
 
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
-<link rel="stylesheet" href="{% static 'polls/css/bootstrap.min.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% block title%}
+<title>Home</title>
+{% endblock %}
 
-<!-- As a heading -->
-<nav class="navbar navbar-dark navbar-expand-lg shadow p-3 mb-5" style="background-color: #0c4b33;">
-    <div class="container">
-        <a class="navbar-brand" href="/">DJango</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/polls">Polls</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container">
-    <div class="col-md-12">
-        <button type="button" class="btn btn-primary">Novo</button>
-    </div>
-    <div class="col-md-12">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Polls
-                    </th>
-                    <th style="width: 150px;">
 
-                    </th>
-                </tr>
-            </thead>            
-            <tbody class="table-group-divider">
-                {% for question in latest_question_list %}
-                <tr>
-                    <td>{{ question.question_text }}</td>
-                    <td>                   
-                        <a class="fa-solid fa-check-to-slot" href="{% url 'polls:detail' question.id %}"></a>
-                        <a class="fa-solid fa-square-poll-horizontal" href="{% url 'polls:results' question.id %}"></a>
-                    </td>
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-        {% if not latest_question_list %}
-        <p>No polls are available...</p>
-        {% endif %}
-    </div>
+{% block content %}
+<div class="col-md-12">
+    <button type="button" class="btn btn-primary">Novo</button>
 </div>
+<div class="col-md-12">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Polls
+                </th>
+                <th style="width: 150px;">
 
-{% load static %}
-<script type="text/javascript" src="{% static 'polls/js/bootstrap.bundle.min.js' %}"></script>
+                </th>
+            </tr>
+        </thead>            
+        <tbody class="table-group-divider">
+            {% for question in latest_question_list %}
+            <tr>
+                <td>{{ question.question_text }}</td>
+                <td>                   
+                    <a class="fa-solid fa-check-to-slot" href="{% url 'polls:detail' question.id %}"></a>
+                    <a class="fa-solid fa-square-poll-horizontal" href="{% url 'polls:results' question.id %}"></a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {% if not latest_question_list %}
+    <p>No polls are available...</p>
+    {% endif %}
+</div>
+{% endblock %}
