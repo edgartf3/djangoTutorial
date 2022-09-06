@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'DjangoTest',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': 'localhost',
+        'HOST': 'postgres',
         'POST': '',
     }
 }

@@ -4,14 +4,14 @@ version: '3.1'
 services:
     postgres:
         container_name: postgres
-        image: postgres:12.3-alpine        
+        image: postgres:12.3-alpine
         restart: always
         environment:
             POSTGRES_PASSWORD: 123456
             PGDATA: /var/lib/postgresql/data/pgdata
-        volumes: 
+        volumes:
             - ./data:/var/lib/postgresql/data/pgdata
-        ports: 
+        ports:
             - 5432:5432
 
     pgadmin:
@@ -24,5 +24,19 @@ services:
             - 15432:80
         volumes:
             - ./pgadmin:/var/lib/pgadmin
+        depends_on:
+            - postgres
+
+    web:
+        build: .
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - ./src:/usr/src/app
+        ports:
+            - "8000:8000"
+        environment:
+            - POSTGRES_NAME=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123456
         depends_on:
             - postgres
