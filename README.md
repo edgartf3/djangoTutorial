@@ -5,10 +5,11 @@ https://docs.djangoproject.com/en/4.1/intro/tutorial01/
 Para subir o ambiente no windows com docker
 
 Execute este comandos em um console
+
     1 - docker-compose up -d --build
 
     2 - docker exec -it web bash
-    
+
 
 *Caso seja a primeira vez que estiver abrindo este ambiente, precisa criar o banco
     
