@@ -15,6 +15,7 @@ services:
             - 5432:5432
 
     pgadmin:
+        container_name: pgadmin
         image: dpage/pgadmin4:6.13
         environment:
             PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
@@ -28,6 +29,7 @@ services:
             - postgres
 
     web:
+        container_name: web
         build: .
         command: python manage.py runserver 0.0.0.0:8000
         volumes:
