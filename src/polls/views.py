@@ -12,6 +12,7 @@ from django.urls import reverse
 from rest_framework import viewsets
 from django.views import generic
 from django.utils import timezone
+from django.urls import reverse_lazy
 
 
 class IndexView(generic.ListView):
@@ -45,6 +46,7 @@ class ResultsView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
 
+
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -63,6 +65,8 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
-class NewView(generic.TemplateView):
+class NewView(generic.CreateView):
     model = Question
+    fields = ['question_text', 'pub_date']
     template_name = 'polls/new.html'
+    success_url = reverse_lazy('polls:index')

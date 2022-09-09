@@ -5,5 +5,28 @@
 {% endblock %}
 
 {% block content %}
-<h1>Em desenvolvimento</h1>
+<h1>Novo cadastro</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+
+<!-- 
+<form action="{% url 'polls:new' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <div class="col-md-12">
+            <label class="form-label">Questão:</label>
+            <input type="text" class="form-control" id="">
+        </div>
+    </div>
+    <br>
+    <div>
+        <input class="btn btn-primary" type="submit" value="Salvar">
+    </div>
+    
+    
+</form> -->
 {% endblock %}
