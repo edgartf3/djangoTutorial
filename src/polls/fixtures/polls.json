@@ -1,0 +1,28 @@
+[
+    {
+        "model":"polls.question",
+        "pk":100,
+        "fields": {
+            "question_text": ".Quem descobriu o Brazil?",
+            "pub_date": "2022-09-12"
+        }
+    },
+    {
+        "model":"polls.choice",
+        "pk":100,
+        "fields": {
+            "question": 100,
+            "choice_text": "Pelé",
+            "votes": 150
+        }
+    },
+    {
+        "model":"polls.choice",
+        "pk":101,
+        "fields": {
+            "question": 100,
+            "choice_text": "Colombo",
+            "votes": 200
+        }
+    }
+]
