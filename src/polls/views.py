@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
+from polls.forms import PesquisaForm
 
 from polls.models import Choice, Question
 from django.shortcuts import render, get_object_or_404
@@ -18,7 +19,7 @@ from django.urls import reverse_lazy
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
-
+    success_url = reverse_lazy('polls:index')
     def get_queryset(self):
         """
         Return the last five published questions (not including those set to be
@@ -45,6 +46,18 @@ class ResultsView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
+
+def pesquisar(request):
+    if (request.method == 'POST'):        
+        return render(request, 'polls/index.html', {
+            'texto':request.POST['texto'],
+            'latest_question_list': Question.objects.filter(question_text__icontains=request.POST['texto']).order_by('-pub_date')[:5]
+            })
+    else:
+        return render(request, 'polls/index.html', {
+            'texto': None,
+            'latest_question_list': Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+            })
 
 
 def vote(request, question_id):
